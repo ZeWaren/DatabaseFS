@@ -1,0 +1,20 @@
+Unpack the tarball into samba/examples/VFS  If you unpack somewhere else,
+you will need to edit the Makefile.
+
+Use the file databasefs.sql to create the two tables in your database
+necessary for DatabaseFS
+
+Run make
+
+Create the appropriate share definition in your smb.conf.  For example:
+[DatabaseFS]
+   comment = DatabaseFS Virtual FS
+   browseable = yes
+   read only = no
+   vfs objects = databasefs:jukebox
+   jukebox: config_file = /path/to/config/file.conf
+
+Reload smbd
+
+Cross your fingers, then point your SMB client at the share.  Check logs
+for errors.
